@@ -1,5 +1,5 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
-import { CreateUserRequest, UserResponse } from '@app/common';
+import { CreateUserRequest, GetUserByIdRequest, UserResponse } from '@app/common';
 
 import { faker } from '@faker-js/faker';
 import { User } from '@app/common';
@@ -12,14 +12,14 @@ export class UsersService implements OnModuleInit {
   private readonly users: User[] = [];
   onModuleInit() {
     for (let i = 0; i <= 10; i++) {
-      this.createUser({
-        firstName: faker.internet.displayName(),
-        lastName: faker.internet.username(),
-        about: faker.lorem.sentence(),
-        avatar: faker.image.avatar(),
-        email: faker.internet.email(),
-        password: faker.internet.password(),
-      });
+      // this.createUser({
+      //   firstName: faker.internet.displayName(),
+      //   lastName: faker.internet.username(),
+      //   about: faker.lorem.sentence(),
+      //   avatar: faker.image.avatar(),
+      //   email: faker.internet.email(),
+      //   password: faker.internet.password(),
+      // });
     }
   }
 
@@ -71,5 +71,16 @@ export class UsersService implements OnModuleInit {
     };
 
     return { user: userResponse };
+  }
+
+  async getUserById(request: GetUserByIdRequest): Promise<any> {
+console.log("request-------",request)
+   const res = await this.databaseService.user.findUnique({
+      where: { id : request.id},
+    })
+console.log(res)
+
+    return res
+
   }
 }

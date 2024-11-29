@@ -1,6 +1,6 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserRequest } from '@app/common';
+import { CreateUserRequest, GetUserByIdRequest } from '@app/common';
 
 @Controller('users')
 export class UsersController {
@@ -19,5 +19,11 @@ export class UsersController {
     //   password: faker.internet.password(),
     // };
     return this.usersService.createUser(request);
+  }
+
+  @Get(':id')
+  async getUserById(@Param('id') request: GetUserByIdRequest){
+    console.log("params", request)
+    return this.usersService.getUserById(request); 
   }
 }

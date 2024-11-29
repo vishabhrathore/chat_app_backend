@@ -92,8 +92,10 @@ export const AUTH_PACKAGE_NAME = 'auth';
 
 export interface UserServiceClient {
   createUser(request: CreateUserRequest): Observable<UserResponse>;
+  // getUserList(request: GetUserByIdRequest): Observable<UserResponse>;
 
-  // getUserById(request: GetUserByIdRequest): Observable<UserResponse>;
+
+  getUserById(request: GetUserByIdRequest): Observable<UserResponse>;
 
   // updateUser(request: UpdateUserRequest): Observable<UserResponse>;
 
@@ -115,7 +117,10 @@ export interface UserServiceController {
     request: CreateUserRequest,
   ): Promise<UserResponse> | Observable<UserResponse> | UserResponse;
 
-  // getUserById(request: GetUserByIdRequest): Promise<UserResponse> | Observable<UserResponse> | UserResponse;
+  // getUserList(request: GetUserByIdRequest): Promise<UserResponse> | Observable<UserResponse> | UserResponse;
+
+
+  getUserById(request: GetUserByIdRequest): Promise<UserResponse> | Observable<UserResponse> | UserResponse;
 
   // updateUser(request: UpdateUserRequest): Promise<UserResponse> | Observable<UserResponse> | UserResponse;
 
@@ -135,6 +140,8 @@ export function UserServiceControllerMethods() {
     const grpcMethods: string[] = [
       'createUser',
       // 'getUserById',
+
+      'getUserById',
       // 'updateUser',
       // 'deleteUser',
       // 'authenticateUser',

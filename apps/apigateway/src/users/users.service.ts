@@ -1,5 +1,6 @@
 import {
   CreateUserRequest,
+  GetUserByIdRequest,
   USER_SERVICE_NAME,
   UserResponse,
   UserServiceClient,
@@ -22,4 +23,9 @@ export class UsersService implements OnModuleInit {
   createUser(request: CreateUserRequest): Observable<UserResponse> {
     return this.userService.createUser(request);
   }
+
+  getUserById(request: GetUserByIdRequest): Observable<UserResponse>{
+  return this.userService.getUserById(request)
+  }
+
 }

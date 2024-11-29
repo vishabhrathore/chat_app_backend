@@ -6,6 +6,7 @@ import {
   CreateUserRequest,
   UserServiceControllerMethods,
   UserResponse,
+  GetUserByIdRequest,
 } from '@app/common';
 import { Observable } from 'rxjs';
 
@@ -19,4 +20,13 @@ export class UsersController implements UserServiceController {
   ): Promise<UserResponse> | Observable<UserResponse> | UserResponse {
     return this.usersService.createUser(request);
   }
+
+
+  getUserById(request: GetUserByIdRequest): Promise<UserResponse> | Observable<UserResponse> | UserResponse {
+    console.log(request ,"request in controller")
+    return this.usersService.getUserById(request)
+  }
+
+
+
 }
