@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("AUTH_DB_URL")
+}
+
+model User {
+  id        String   @id @default(uuid()) @db.Uuid
+  firstName String
+  lastName  String
+  about     String?
+  avatar    String?
+  email     String   @unique
+  verified  Boolean  @default(false)
+  socketId  String?
+  status    String?
+  friends   String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Otp {
+  id        Int      @id @default(autoincrement())
+  email     String
+  otpCode   String
+  createdAt DateTime @default(now())
+}
+
+model AuthenticationToken {
+  id        Int      @id @default(autoincrement())
+  userId    String   @db.Uuid
+  token     String
+  createdAt DateTime @default(now())
+}
